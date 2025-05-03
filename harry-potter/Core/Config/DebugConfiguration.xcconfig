@@ -1,0 +1,12 @@
+//
+//  DebugConfiguration.xcconfig
+//  harry-potter
+//
+//  Created by Edilberto Ramos on 03/05/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CONNECTION_PROTOCOL = https
+BASE_URL = hp-api.onrender.com/api
