@@ -1,5 +1,5 @@
 //
-//  FeedRowView.swift
+//  CharacterRowView.swift
 //  harry-potter
 //
 //  Created by Edilberto Ramos on 05/05/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedRowView: View {
+struct CharacterRowView: View {
     let character: HPCharacter
 
     var body: some View {
@@ -36,6 +36,11 @@ struct FeedRowView: View {
                         .foregroundColor(.secondary)
                 }
             }
+            
+            Spacer()
+            
+            FavoriteButton(id: character.id)
+                .buttonStyle(.plain)
         }
         .padding(.vertical, 4)
     }
@@ -43,6 +48,6 @@ struct FeedRowView: View {
 }
 
 #Preview {
-    FeedRowView(character: HPCharacter.createMock())
+    CharacterRowView(character: HPCharacter.createMock())
 }
 

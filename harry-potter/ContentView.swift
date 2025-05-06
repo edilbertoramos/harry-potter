@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-        
+    @EnvironmentObject var userSettings: UserSettings
+
     var body: some View {
-        FeedView()
+        TabView {
+            FeedView()
+                .tabItem { Label("Explore", systemImage: "list.bullet") }
+            
+            FavoritesView()
+                .tabItem { Label("Favorites", systemImage: "heart.fill") }
+            
+            SettingsView()
+                .tabItem { Label("Settings", systemImage: "gearshape") }
+        }
+        .tint(userSettings.preferredHouse.tabColor)
     }
     
 }

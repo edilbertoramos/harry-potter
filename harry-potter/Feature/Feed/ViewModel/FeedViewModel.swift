@@ -5,7 +5,7 @@
 //  Created by Edilberto Ramos on 05/05/25.
 //
 
-import Foundation
+import SwiftUI
 
 class FeedViewModel: ObservableObject {
     
@@ -21,7 +21,7 @@ class FeedViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published private(set) var viewState: ViewState?
     
-    @Published var selectedFilter: ItemType = .all {
+    @Published var selectedFilter: CharacterType = .all {
         didSet {
             print(selectedFilter)
             Task {
@@ -61,12 +61,12 @@ class FeedViewModel: ObservableObject {
     @MainActor
     func getAll() async {
         do {
-            viewState = .loading
+            withAnimation { viewState = .loading }
             let response = try await self.service.characters()
-            viewState = .finished
+            withAnimation { viewState = .finished }
             switch response.result {
             case .success(let results):
-                self.allResults.append(contentsOf: results)
+                self.allResults = results
             case .failure(_):
                 self.errorMessage = "There was a service failure!"
             }
@@ -78,12 +78,12 @@ class FeedViewModel: ObservableObject {
     @MainActor
     func getStudents() async {
         do {
-            viewState = .loading
+            withAnimation { viewState = .loading }
             let response = try await self.service.students()
-            viewState = .finished
+            withAnimation { viewState = .finished }
             switch response.result {
             case .success(let results):
-                self.studentResults.append(contentsOf: results)
+                self.studentResults = results
             case .failure(_):
                 self.errorMessage = "There was a service failure!"
             }
@@ -95,12 +95,12 @@ class FeedViewModel: ObservableObject {
     @MainActor
     func getIStaff() async {
         do {
-            viewState = .loading
+            withAnimation { viewState = .loading }
             let response = try await self.service.staff()
-            viewState = .finished
+            withAnimation { viewState = .finished }
             switch response.result {
             case .success(let results):
-                self.staffResults.append(contentsOf: results)
+                self.staffResults = results
             case .failure(_):
                 self.errorMessage = "There was a service failure!"
             }
